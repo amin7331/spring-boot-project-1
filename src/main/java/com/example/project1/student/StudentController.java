@@ -33,6 +33,13 @@ public class StudentController {
         studentService.updateStudent(studentId, name, age, email);
 
     }
+
+    @PutMapping("test/{username}")
+    public void testUpdate(@PathVariable("username") String name,@RequestBody Student student){
+        studentService.testUpdate(name,student);
+    }
+
+
     @DeleteMapping("api/students/{studentId}")
     public void removeStudent(@PathVariable("studentId") Long studentId){
         studentService.removeStudent(studentId);

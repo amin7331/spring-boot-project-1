@@ -48,9 +48,23 @@ public class StudentService {
 
     public void removeStudent(Long studentId) {
         boolean isExist = studentRepository.existsById(studentId);
-        if (!isExist){
+        if (!isExist) {
             throw new IllegalStateException("student was not founded");
         }
         studentRepository.deleteById(studentId);
+    }
+
+    @Transactional
+    public void testUpdate(String name, Student student) {
+        Student studentInDb = studentRepository.findStudentByName(name).orElseThrow(() -> new IllegalStateException("student was not founded..."));
+
+        if (student.getName() != null) {
+            studentInDb.setName(student.getName());
+        }
+
+        if (student.getAge() != null){
+            studentInDb.setAge(student.getAge());
+        }
+
     }
 }
